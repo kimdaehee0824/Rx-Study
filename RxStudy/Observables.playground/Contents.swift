@@ -47,10 +47,34 @@ Observable.from([1, 2, 3])
 // 헤제할 때 필요한 코드만 Dispossed 사용, 보통 2번으로
 
 // 2
+
+var bag = DisposeBag()
 Observable.from([1, 2, 3])
     .subscribe {
         print("=== start ===")
         print($0)
         print("=== end ===")
+        
     }
+    .disposed(by: bag)
+
+bag = DisposeBag()  //이렇게 하면 헤제가? 된데요.
 // Dispossed는 Observable이 전달하는 함수가 아님
+
+let subScription2 = Observable<Int>.interval(.seconds(2), scheduler: MainScheduler.instance)
+    .subscribe(onNext: { elem in
+        print("next", elem)
+    }, onError: { error in
+        print("Error", error)
+    }, onCompleted: {
+        print("Comaleted ")
+    }, onDisposed: {
+        print("Dispossed")
+        
+    })
+DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+    subScription2.dispose()
+    
+}
+
+
