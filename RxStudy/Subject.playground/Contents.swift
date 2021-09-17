@@ -19,7 +19,6 @@ o1.disposed(by: bag)
 
 subject.onNext("RxSwift")
 
-print("\n-------------------------\n")
 let o2 = subject.subscribe { print(">> 2", $0) }
 o2.disposed(by: bag)
 
@@ -38,9 +37,6 @@ subject.onNext("ohhhhh")    // onCompleted 이후 o3도 Completed
  PublishSubject는 이밴트가 전달되면 즉시 전달됨
  최초와 첫번째 사이 이밴츠는 사라짐
  */
-/*
- ------------------------------------------------------------------------
- */
 
 print("\n-------------------------\nBehaviorSubject\n")
 
@@ -58,8 +54,8 @@ b.subscribe { print(">> BehaviorSubject", $0) }
 b.onNext(2)
 
 b.subscribe { print(">> BehaviorSubject2", $0) }
-    // 생성할 때에 값을 가지고 있다가 새로운 Observer에 저장함
-    // 가장 최신 이밴트를 Observer에 저장함
+// 생성할 때에 값을 가지고 있다가 새로운 Observer에 저장함
+// 가장 최신 이밴트를 Observer에 저장함
 
 //b.onCompleted() // 모든 subscribe에게 onCompleted 이밴트가 저장됨
 
@@ -67,4 +63,30 @@ b.onError(MyError.error)    //onCompleted와 마찬가지 전달되고 끝
 
 b.subscribe { print(">> BehaviorSubject3", $0) }
 .disposed(by: bag)  // 다른 곳에서 onCompleted를 저장하였기 때문에 onNext이밴트 저장 안됨
+
+// ReplaySubject
+print("\n-------------------------\nReplaySubject\n")
+
+let rs = ReplaySubject<Int>.create(bufferSize: 3)   //3개의 이밴트를 저장하는 버퍼 생성
+
+(1 ... 10).forEach { rs.onNext($0) }    // 10개의 이밴트를 생성
+rs.subscribe { print(">> Observer1", $0) }  // bufferSize가 3개이므로 뒤에 2개를 저장
+.disposed(by: bag)
+
+rs.subscribe { print(">> Observer2", $0) }  // 동일하게 저장
+.disposed(by: bag)
+
+rs.onNext(11)   // 즉시 저장, buffer의 가장 오래된 이밴트가 사라짐
+
+rs.subscribe { print(">> Observer3", $0) }
+.disposed(by: bag)
+    // ReplaySubject는 가장 최신의 buffer만큼을 저장, buffer는 메모리에 저장되므로 관리 필요
+
+rs.onCompleted()    //모두 onCompleted를 저장
+
+rs.subscribe { print(">> Observer4", $0) }
+.disposed(by: bag)
+    // buffer에 저장된 이밴트를 수행하고 onCompleted를 수행
+    // onError도 마찬가지
+
 
