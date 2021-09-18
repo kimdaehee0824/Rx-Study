@@ -1,5 +1,6 @@
 import UIKit
 import RxSwift
+import RxCocoa
 
 let bag = DisposeBag()
 enum MyError : Error {
@@ -110,3 +111,28 @@ asubject.onCompleted()  //가장 최근의 Next 이밴트가 저장
  Next 이밴트가 없을 때에는 Completed만 전달
  error 이밴트를 지정하면 next 전갈 안되고 에러만 표시
  */
+
+
+    // Relay
+    // import RxCocoa
+
+print("\n-------------------------\nReplaySubject\n")
+
+let pelay = PublishRelay<Int>()
+pelay.subscribe { print("1 : \($0)") }
+.disposed(by: bag)
+
+pelay.accept(1) // Relay는 accept사용, onNext 사용 불가
+
+let brelay = BehaviorRelay<Int>(value: 1)
+
+brelay.accept(2)
+
+brelay.subscribe { print("2 : \($0)") }
+.disposed(by: bag)
+    //가장 최근 accept가 전달
+
+brelay.accept(3)    //바로 전달
+
+print(brelay.value) // 3
+
