@@ -89,4 +89,24 @@ rs.subscribe { print(">> Observer4", $0) }
     // buffer에 저장된 이밴트를 수행하고 onCompleted를 수행
     // onError도 마찬가지
 
+    // AsyncSubject
+print("\n-------------------------\nAsyncSubject\n")
 
+let asubject = AsyncSubject<Int>()
+
+asubject
+    .subscribe { print($0) }
+    .disposed(by: bag)
+                            
+asubject.onNext(1)
+    //AsyncSubject는 onCompleted가 나오지 않아 전달 안됨
+
+asubject.onNext(2)
+asubject.onNext(3)
+asubject.onCompleted()  //가장 최근의 Next 이밴트가 저장
+    //구독 종료
+/*
+ AsyncSubject는 가장 최신의 next 이밴트를 저장하고 Completed를 출력
+ Next 이밴트가 없을 때에는 Completed만 전달
+ error 이밴트를 지정하면 next 전갈 안되고 에러만 표시
+ */
