@@ -61,3 +61,17 @@ Observable.from(products)   // products는 배열, of에서 사용 불가
      ObservableSequence(elements: array, scheduler: scheduler)
  }
  */
+
+    // range
+
+print("\n--------------------\nrange")
+
+Observable.range(start: 1, count: 5)    //시작부터 start count번까지 1씩 증가
+    .subscribe { print($0)}
+    .disposed(by: disposeBag)
+
+/*
+ public static func range(start: Element, count: Element, scheduler: ImmediateSchedulerType = CurrentThreadScheduler.instance) -> Observable<Element> {
+     RangeProducer<Element>(start: start, count: count, scheduler: scheduler)
+ }
+ */
