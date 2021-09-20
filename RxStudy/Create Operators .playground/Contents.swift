@@ -99,3 +99,21 @@ Observable.generate(initialState: iPhone, condition: {$0.count <= 10}, iterate: 
  Generate(initialState: initialState, condition: condition, iterate: iterate, resultSelector: { $0 }, scheduler: scheduler)
  }
  */
+
+// repeatElement
+
+let seven = Int(7)
+print("\n--------------------\nrepeatElement")
+
+Observable.repeatElement(element)   // 반복적으로 방출하는 Observable 반환
+    .take(seven)    // take로 감싸주지 않는다면 무한루프 돕니다. 조심하세요!!
+    .subscribe { print($0)}
+    .disposed(by: disposeBag)
+
+// 무한정 도는 반복루프
+
+/*
+ public static func repeatElement(_ element: Element, scheduler: ImmediateSchedulerType = CurrentThreadScheduler.instance) -> Observable<Element> {
+ RepeatElement(element: element, scheduler: scheduler)
+ }
+ */
