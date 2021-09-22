@@ -8,6 +8,8 @@ let keyBoard =  "⌨️"
 let iPhone = "📱"
 let cdBox = "💽"
 let products = ["📱", "⌚️", "🖱", "⌨️", "🖨"]
+let fruits = ["🍏", "🍐", "🍊", "🍋", "🍌", "🍉"]
+var flag = true
 
 // Just
 print("\n--------------------\nJust")
@@ -41,11 +43,6 @@ Observable.of([1, 2], [3, 4], [5, 6])
     .subscribe { event in print(event)}
     .disposed(by: disposeBag)
 
-/*
- public static func of(_ elements: Element ..., scheduler: ImmediateSchedulerType = CurrentThreadScheduler.instance) -> Observable<Element> {
- ObservableSequence(elements: elements, scheduler: scheduler)
- }
- */
 
 // from
 print("\n--------------------\nfrom")
@@ -56,11 +53,7 @@ Observable.from(products)   // products는 배열, of에서 사용 불가
     .disposed(by: disposeBag)
 // 배열에 포함된 요소를 하나씩 방출
 
-/*
- public static func from(_ array: [Element], scheduler: ImmediateSchedulerType = CurrentThreadScheduler.instance) -> Observable<Element> {
- ObservableSequence(elements: array, scheduler: scheduler)
- }
- */
+
 
 // range
 
@@ -70,11 +63,7 @@ Observable.range(start: 1, count: 5)    //시작부터 start count번까지 1씩
     .subscribe { print($0)}
     .disposed(by: disposeBag)
 
-/*
- public static func range(start: Element, count: Element, scheduler: ImmediateSchedulerType = CurrentThreadScheduler.instance) -> Observable<Element> {
- RangeProducer<Element>(start: start, count: count, scheduler: scheduler)
- }
- */
+
 
 // generate
 print("\n--------------------\ngenerate")
@@ -94,11 +83,7 @@ Observable.generate(initialState: iPhone, condition: {$0.count <= 10}, iterate: 
  iterate : 값을 바꾸는 거 (증가, 감소 등)
  
  */
-/*
- public static func generate(initialState: Element, condition: @escaping (Element) throws -> Bool, scheduler: ImmediateSchedulerType = CurrentThreadScheduler.instance, iterate: @escaping (Element) throws -> Element) -> Observable<Element> {
- Generate(initialState: initialState, condition: condition, iterate: iterate, resultSelector: { $0 }, scheduler: scheduler)
- }
- */
+
 
 // repeatElement
 
@@ -112,8 +97,23 @@ Observable.repeatElement(element)   // 반복적으로 방출하는 Observable �
 
 // 무한정 도는 반복루프
 
-/*
- public static func repeatElement(_ element: Element, scheduler: ImmediateSchedulerType = CurrentThreadScheduler.instance) -> Observable<Element> {
- RepeatElement(element: element, scheduler: scheduler)
- }
- */
+// deferred
+// 결과에 따라 방출되는 값이 달라짐
+
+print("\n--------------------\ndeferred")
+
+let factory : Observable<String> = Observable.deferred {    // 타입 추론이 안되면 <String>
+    flag.toggle()   // 방향 뒤집기
+    if flag {
+        return Observable.from(products)
+    } else {
+        return Observable.from(fruits)
+    }
+}
+factory // 1
+    .subscribe { print($0)}
+    .disposed(by: disposeBag)
+
+factory // 2
+    .subscribe { print($0)}
+    .disposed(by: disposeBag)
