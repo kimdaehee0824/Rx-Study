@@ -11,6 +11,10 @@ let products = ["📱", "⌚️", "🖱", "⌨️", "🖨"]
 let fruits = ["🍏", "🍐", "🍊", "🍋", "🍌", "🍉"]
 var flag = true
 
+enum MyError : Error {
+    case error
+}
+
 // Just
 print("\n--------------------\nJust")
 
@@ -117,3 +121,26 @@ factory // 1
 factory // 2
     .subscribe { print($0)}
     .disposed(by: disposeBag)
+
+
+    // create
+Observable<String>.create { (observer) -> Disposable in
+    
+    guard let url = URL(string: "https://www.exaple.com") else {
+        observer.onError(MyError.error)
+        return Disposables.create() // Disposables 리턴해야 됨
+        // Disposable은 Disposables 리턴, 후 create() 붙여서 리턴
+    }   // Observer 로 전달된 파라미터
+    
+    guard let html = try? String(contentsOf: url, encoding: .utf8) else {
+        observer.onError(MyError.error)
+        return Disposables.create() // Disposables 리턴해야 됨
+    }
+    
+        // 문자열 방출
+    observer.onNext(html)
+    observer.onCompleted()
+    return Disposables.create() // 정상적으로  종료
+}
+.subscribe { print($0)}
+.disposed(by: disposeBag)
