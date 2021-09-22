@@ -124,6 +124,8 @@ factory // 2
 
 
     // create
+print("\n--------------------\ncreate")
+
 Observable<String>.create { (observer) -> Disposable in
     
     guard let url = URL(string: "https://www.exaple.com") else {
@@ -139,8 +141,21 @@ Observable<String>.create { (observer) -> Disposable in
     
         // 문자열 방출
     observer.onNext(html)
-    observer.onCompleted()
+    observer.onCompleted()  // 이거 전에 onNext event를 전달해야함
+    observer.onNext("after Completed")  // 어떠한 경우에도 반출되면 안됨
     return Disposables.create() // 정상적으로  종료
 }
 .subscribe { print($0)}
 .disposed(by: disposeBag)
+
+// 현재 주소를 정획하게 적지 않아 error message 출력됨
+
+// empty
+print("\n--------------------\nempty")
+
+Observable<Void>.empty()    // 예는 파라미터가 없음
+    .subscribe { print($0)}
+    .disposed(by: disposeBag)   // completed event만 전달되고 끝남
+/*
+ observer 가 아무것도 안하고 종료해야 할 때에 자주 사용
+ */
