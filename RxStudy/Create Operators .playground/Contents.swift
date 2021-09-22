@@ -123,12 +123,12 @@ factory // 2
     .disposed(by: disposeBag)
 
 
-    // create
+// create
 print("\n--------------------\ncreate")
 
-Observable<String>.create { (observer) -> Disposable in
+let create = Observable<String>.create { (observer) -> Disposable in
     
-    guard let url = URL(string: "https://www.exaple.com") else {
+    guard let url = URL(string: "https://www.a.com") else {
         observer.onError(MyError.error)
         return Disposables.create() // Disposables 리턴해야 됨
         // Disposable은 Disposables 리턴, 후 create() 붙여서 리턴
@@ -138,13 +138,12 @@ Observable<String>.create { (observer) -> Disposable in
         observer.onError(MyError.error)
         return Disposables.create() // Disposables 리턴해야 됨
     }
-    
-        // 문자열 방출
+    // 문자열 방출
     observer.onNext(html)
     observer.onCompleted()  // 이거 전에 onNext event를 전달해야함
-    observer.onNext("after Completed")  // 어떠한 경우에도 반출되면 안됨
     return Disposables.create() // 정상적으로  종료
 }
+create
 .subscribe { print($0)}
 .disposed(by: disposeBag)
 
@@ -159,3 +158,10 @@ Observable<Void>.empty()    // 예는 파라미터가 없음
 /*
  observer 가 아무것도 안하고 종료해야 할 때에 자주 사용
  */
+
+// error
+print("\n--------------------\nerrror")
+
+Observable<Void>.error(MyError.error)    // 예는 파라미터가 없음
+    .subscribe { print($0)}
+    .disposed(by: disposeBag)   // error event만 전달되고 끝남
