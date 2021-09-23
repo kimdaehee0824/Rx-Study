@@ -41,3 +41,22 @@ Observable.from(numbers)
     .subscribe {print($0)}
     .disposed(by: disposeBag)
 
+Observable.from(numbers)
+    .skip { !$0.isMultiple(of: 2)}  // skipwhile는 사라짐
+    .subscribe {print($0)}
+    .disposed(by: disposeBag)
+
+
+print("\n--------------------\nskipUntil\n")
+
+let subject = PublishSubject<Int>()
+let triger = PublishSubject<Int>()
+subject.skip(until: triger)
+    .subscribe {print($0)}
+    .disposed(by: disposeBag)
+
+subject.onNext(1)   // trigger가 요쇼 방출 안함
+triger.onNext(0)    // No
+subject.onNext(2)   // 이제부터 방출됨
+
+
