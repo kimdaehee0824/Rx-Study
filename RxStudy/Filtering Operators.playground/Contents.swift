@@ -3,6 +3,7 @@ import RxSwift
 
 let disposeBag = DisposeBag()
 let fruits = ["🍏", "🍐", "🍊", "🍋", "🍌", "🍉"]
+let numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
 
 // ignoreElements
 print("\n--------------------\nignoreElements\n")
@@ -23,3 +24,20 @@ Observable.from(fruits)
 // 제한적으로 방출
     .subscribe {print($0)}
     .disposed(by: disposeBag)
+
+// filter
+print("\n--------------------\nfilter\n")
+
+Observable.from(numbers)
+    .filter { $0.isMultiple(of: 2)}
+    .subscribe {print($0)}
+    .disposed(by: disposeBag)
+
+// skip
+print("\n--------------------\nskip\n")
+
+Observable.from(numbers)
+    .skip(3)    // 선택된 숫자만큼 스킵
+    .subscribe {print($0)}
+    .disposed(by: disposeBag)
+
