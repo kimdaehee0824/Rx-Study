@@ -89,4 +89,33 @@ subject2.take(until: triger2)
 subject2.onNext(1)
 triger2.onNext(0)   // 요소를 방출하면 completed 방출됨
 
+// single
+print("\n--------------------\nsingle\n")
+
+Observable.just(1)
+    .single()   // 예는 하나만 방출됨 고로 completed
+    .subscribe {print($0)}
+    .disposed(by: disposeBag)
+
+Observable.from(numbers)
+    .single()   // 예는 문자열임, 고로 Error messaage 나옴, 방출은 하나만 됨
+    .subscribe {print($0)}
+    .disposed(by: disposeBag)
+
+// 이런 방법도 있음
+Observable.from(numbers)
+    .single { $0 == 3 } // 예는 애러가 안뜨네??
+    .subscribe {print($0)}
+    .disposed(by: disposeBag)
+
+let subject3 = PublishSubject<Int>()
+subject3.single()
+    .subscribe {print($0)}
+    .disposed(by: disposeBag)
+
+subject3.onNext(100)
+subject3.onNext(200)    // 이미 하나의 onNext가 전달되어 Error message가 나옴
+
+
+
 
