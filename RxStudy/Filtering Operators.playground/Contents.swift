@@ -60,3 +60,33 @@ triger.onNext(0)    // No
 subject.onNext(2)   // 이제부터 방출됨
 
 
+// take
+print("\n--------------------\ntake\n")
+
+Observable.from(numbers)
+    .take(5)     // next 이밴트에만 영향, 나머지는 영향을 주지 낳음
+    .subscribe {print($0)}
+    .disposed(by: disposeBag)
+
+// takeWhile
+
+Observable.from(numbers)
+    .takeWhile { !$0.isMultiple(of: 2)} // takeWhile 권장하지 않음
+// 홀수가 나오고는 있지만 방출되지는 않음
+// 예가 false를 리턴하면 더이상 방출하지 않음, 이후 Completed, Error event만 전달
+    .subscribe {print($0)}
+    .disposed(by: disposeBag)
+
+// takeUntil
+
+let subject2 = PublishSubject<Int>()
+let triger2 = PublishSubject<Int>()
+
+subject2.take(until: triger2)
+    .subscribe {print($0)}
+    .disposed(by: disposeBag)
+
+subject2.onNext(1)
+triger2.onNext(0)   // 요소를 방출하면 completed 방출됨
+
+
