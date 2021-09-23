@@ -3,7 +3,7 @@ import RxSwift
 
 let disposeBag = DisposeBag()
 let fruits = ["🍏", "🍐", "🍊", "🍋", "🍌", "🍉"]
-let numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+let numbers = [1, 2, 3, 4, 5, 6, 7, 8, 1, 2, 3, 4, 7, 7, ]
 
 // ignoreElements
 print("\n--------------------\nignoreElements\n")
@@ -116,6 +116,13 @@ subject3.single()
 subject3.onNext(100)
 subject3.onNext(200)    // 이미 하나의 onNext가 전달되어 Error message가 나옴
 
+// distinctUntilChanged
+print("\n--------------------\nsingle\n")
 
+Observable.from(numbers)
+    .distinctUntilChanged() // 전 배열과 비교해 같으면 무시.
+    .subscribe {print($0)}
+    .disposed(by: disposeBag)
 
+// 이거는 좀 별로인듯
 
