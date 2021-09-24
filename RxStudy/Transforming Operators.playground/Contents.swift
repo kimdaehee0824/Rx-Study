@@ -48,3 +48,53 @@ subject2.onNext(a)
 subject2.onNext(b)  // 값이 바뀌면 자동으로 변경
 subject2.onNext(c)
 // network 연결할 떄 자주 사용
+
+a.onNext(12)
+b.onNext(32)
+b.onNext(42)
+c.onNext(62)
+
+let a2 = BehaviorSubject(value: 1)
+let b2 = BehaviorSubject(value: 2)
+
+// flatMapFirst
+print("\n--------------------\nflatMapFirst\n")
+
+let subject3 = PublishSubject<BehaviorSubject<Int>>()
+subject3
+    .flatMapFirst { $0.asObservable() }  // asObservable는 subject를 Observable로 변환
+    .subscribe { print($0) }
+    .disposed(by: disposeBag)
+
+
+subject3.onNext(b2) // 첫번째로 나오는 거만 나옴
+subject3.onNext(a2)
+
+a2.onNext(12)
+b2.onNext(32)   // 예는 나옴, b2가 상속? 비슷한거를 하니까
+b2.onNext(42)
+
+// flatMapLatest
+print("\n--------------------\nflatMapLatest\n")
+
+let a3 = BehaviorSubject(value: 1)
+let b3 = BehaviorSubject(value: 2)
+
+//a3.onNext(12)
+//b3.onNext(32)   // 예는 나옴, b2가 상속? 비슷한거를 하니까
+//b3.onNext(42)
+
+let subject4 = PublishSubject<BehaviorSubject<Int>>()
+subject4
+    .flatMapLatest { $0.asObservable() }  // asObservable는 subject를 Observable로 변환
+    .subscribe { print($0) }
+    .disposed(by: disposeBag)
+
+subject4.onNext(b3)
+
+b3.onNext(32)
+b3.onNext(42)
+
+subject4.onNext(a3) // 마지막에 나온 거를 보내기 떄문에 a3 이제 값니 변경되어도 방출되지 않음
+a3.onNext(44)
+b3.onNext(54)   // b3는 전달되지 않음
