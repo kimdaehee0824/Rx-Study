@@ -98,3 +98,12 @@ b3.onNext(42)
 subject4.onNext(a3) // 마지막에 나온 거를 보내기 떄문에 a3 이제 값니 변경되어도 방출되지 않음
 a3.onNext(44)
 b3.onNext(54)   // b3는 전달되지 않음
+
+// scan
+print("\n--------------------\nscan\n")
+
+Observable.range(start: 0, count: 10)
+    .scan(0, accumulator: +)    // 누적되어 더한 값을 전달함, 합산이나 감산을 할떼에 사용
+    .subscribe { print($0) }
+    .disposed(by: disposeBag)
+
