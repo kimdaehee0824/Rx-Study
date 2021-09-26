@@ -111,7 +111,7 @@ Observable.range(start: 0, count: 10)
 print("\n--------------------\nbuffer\n")
 
 Observable<Int>.interval(.seconds(1), scheduler: MainScheduler.instance)
-//    .buffer(timeSpan: .seconds(2), count: 3, scheduler: MainScheduler.instance)
+    .buffer(timeSpan: .seconds(2), count: 3, scheduler: MainScheduler.instance)
     .take(6)    // 6개만 방출
     .subscribe { print($0) }
     .disposed(by: disposeBag)
@@ -134,4 +134,19 @@ Observable<Int>.interval(.seconds(1), scheduler: MainScheduler.instance)
             // observable이 observable을 방출 : inner
         }
     }
+    .disposed(by: disposeBag)
+
+let numberStr = ["aa", "sds", "ffwg", "wewer", "fsfeg", "e"]
+
+// groupBy
+print("\n--------------------\ngroupBy\n")
+// 방출되는 요소를 조건에 따라 그룹핑하는 groupBy 연산자
+
+Observable.from(numberStr)
+    .groupBy { $0.count }
+    .subscribe(onNext: { g in
+        print("== \(g.key)")    // key방출
+        g.subscribe {  print($0) }
+    })
+// GroupedObservable 방출
     .disposed(by: disposeBag)
