@@ -111,11 +111,27 @@ Observable.range(start: 0, count: 10)
 print("\n--------------------\nbuffer\n")
 
 Observable<Int>.interval(.seconds(1), scheduler: MainScheduler.instance)
-    .buffer(timeSpan: .seconds(2), count: 3, scheduler: MainScheduler.instance)
-    .take(6)    // 6개반 방출
+//    .buffer(timeSpan: .seconds(2), count: 3, scheduler: MainScheduler.instance)
+    .take(6)    // 6개만 방출
     .subscribe { print($0) }
     .disposed(by: disposeBag)
 /*
  timeSpan은 초마다 방출, 허나 count가 되면 시간이 지나지 않나도 방출
  count는 timeSpan이 졍과되지 않을 동안 수집함, 시간이 끝나면 방출하지 않음
+ 밑에 있는 window를 주석 처리하고 실행해야 함
  */
+
+// window
+print("\n--------------------\nwindow\n")
+
+Observable<Int>.interval(.seconds(1), scheduler: MainScheduler.instance)
+    .window(timeSpan: .seconds(2), count: 3, scheduler: MainScheduler.instance)
+    .take(6)
+    .subscribe {
+        print($0)
+        if let observable = $0.element {
+            observable.subscribe { print("inner : \($0)")}  // 새로운 observable 생성 가능
+            // observable이 observable을 방출 : inner
+        }
+    }
+    .disposed(by: disposeBag)
