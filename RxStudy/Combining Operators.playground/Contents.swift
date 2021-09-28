@@ -46,3 +46,4 @@ languangs.onNext("SwiftUI!")    // languangs가 onCompleted되어있지 않기 �
 
 languangs.onCompleted() // 이러면 onCompleted됨
 
+// 귀찮다. 할게 얼마나 많은데, 나중에 다시 보는걸로, 물론 강의만
