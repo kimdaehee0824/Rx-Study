@@ -88,4 +88,27 @@ rSource
    .subscribe { print("🔴", $0) }
    .disposed(by: mBag)
 
-rSource.connect()
+//rSource.connect()
+
+// refCount
+print("\n-------refCount-------\n")
+
+let rsource = Observable<Int>.interval(.seconds(1), scheduler: MainScheduler.instance)
+    .debug()
+    .publish()
+    .refCount() // 이거흫 사용해야지 connect이런거 자동으로 됨
+
+let observer1 = rsource
+   .subscribe { print("🔵", $0) }
+
+DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+   observer1.dispose()  // 처음 구독 중지
+}   // RxSwift는 disConnect라고 함
+
+DispatchQueue.main.asyncAfter(deadline: .now() + 7) {
+   let observer2 = rsource.subscribe { print("🔴", $0) }
+
+   DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+      observer2.dispose()
+   }
+}
