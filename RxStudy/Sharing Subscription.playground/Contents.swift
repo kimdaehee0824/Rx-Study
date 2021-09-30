@@ -98,17 +98,44 @@ let rsource = Observable<Int>.interval(.seconds(1), scheduler: MainScheduler.ins
     .publish()
     .refCount() // 이거흫 사용해야지 connect이런거 자동으로 됨
 
-let observer1 = rsource
+//let observer1 = rsource
+//   .subscribe { print("🔵", $0) }
+//
+//DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+//   observer1.dispose()  // 처음 구독 중지
+//}   // RxSwift는 disConnect라고 함
+//
+//DispatchQueue.main.asyncAfter(deadline: .now() + 7) {
+//   let observer2 = rsource.subscribe { print("🔴", $0) }
+//
+//   DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+//      observer2.dispose()
+//   }
+//}
+
+// share
+print("\n-------share-------\n")
+
+let ssource = Observable<Int>.interval(.seconds(1), scheduler: MainScheduler.instance)
+    .debug()
+    .share(replay: 5, scope: .forever)  // forever를 넣으면
+
+let sobserver1 = ssource
    .subscribe { print("🔵", $0) }
 
-DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
-   observer1.dispose()  // 처음 구독 중지
-}   // RxSwift는 disConnect라고 함
+let sobserver2 = ssource
+   .delaySubscription(.seconds(3), scheduler: MainScheduler.instance)
+   .subscribe { print("🔴", $0) }
+
+DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
+   sobserver1.dispose()
+   sobserver2.dispose()
+}
 
 DispatchQueue.main.asyncAfter(deadline: .now() + 7) {
-   let observer2 = rsource.subscribe { print("🔴", $0) }
+   let sobserver3 = ssource.subscribe { print("⚫️", $0) }
 
    DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
-      observer2.dispose()
+      sobserver3.dispose()
    }
 }
