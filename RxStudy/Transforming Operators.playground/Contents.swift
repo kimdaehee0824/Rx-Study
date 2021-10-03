@@ -25,7 +25,7 @@ print("\n--------------------\nmap\n")
 
 Observable.from(skills)
 //    .map { "hello \($0)" }
-    .map { $0.count }   // array의
+    .map { $0.count }   // array의 개수를 출력
     .subscribe { print($0)}
     .disposed(by: disposeBag)
 
