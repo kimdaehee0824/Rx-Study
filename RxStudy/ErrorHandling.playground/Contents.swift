@@ -39,3 +39,34 @@ subject1.onError(MyError.error) // catchAndReturn에 들어가 있는 걸로 바
  발생한 종류에 상관없이 항상 동일한 error만 return
  클로져를 통해 error를 자유롭게 처리하는 장점이 있다.
  */
+
+// retry
+print("\n----------retry----------\n")
+
+var attempts = 1
+
+let source = Observable<Int>.create { observer in
+   let currentAttempts = attempts
+   print("#\(currentAttempts) START")
+   
+   if attempts < 3 {
+      observer.onError(MyError.error)
+      attempts += 1
+   }
+   
+   observer.onNext(1)
+   observer.onNext(2)
+   observer.onCompleted()
+         
+   return Disposables.create {
+       print("#\(currentAttempts) END")  // 시작과 끝을 확인할 수 있는 코드
+   }
+}
+
+source
+    .retry(7)
+// 현재는 7번 돈다. 마지막 이밴트도 실페한다면 error event를 전달. 성공한다면 바로 끝냄
+// 중요!!!, 우리가 원하는 결과를 할라면 무조건 +1을 해야 한다. 첫번째 꺼는 카운트 안되니까
+// 에지간하면 파라미터를 가지고 하도록 하자, 현재는 3번 카운트, 하지만 잘못하면 무한루프 쌉가능
+   .subscribe { print($0) }
+   .disposed(by: bag)
