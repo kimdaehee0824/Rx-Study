@@ -70,3 +70,37 @@ source
 // 에지간하면 파라미터를 가지고 하도록 하자, 현재는 3번 카운트, 하지만 잘못하면 무한루프 쌉가능
    .subscribe { print($0) }
    .disposed(by: bag)
+
+// retryWhen
+print("\n----------retryWhen----------\n")
+
+var attempts2 = 1
+
+let source2 = Observable<Int>.create { observer in
+   let currentAttempts = attempts
+   print("#\(currentAttempts) START")
+   
+   if attempts2 < 3 {
+      observer.onError(MyError.error)
+      attempts2 += 1
+   }
+   
+   observer.onNext(1)
+   observer.onNext(2)
+   observer.onCompleted()
+         
+   return Disposables.create {
+       print("#\(currentAttempts) END")  // 시작과 끝을 확인할 수 있는 코드
+   }
+}
+
+let trriger = PublishSubject<Void>()
+// 예를 눌렀을 때에 작동하도록
+
+source2
+    .retry {_ in trriger }
+   .subscribe { print($0) }
+   .disposed(by: bag)
+
+trriger.onNext(())
+trriger.onNext(())  // 이때는 애러가 안나오고 정상 작동
