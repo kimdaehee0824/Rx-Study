@@ -15,11 +15,7 @@ xcuserdata/
 *.xccheckout
 
 *Pods
-*RxStudy.xcodeproj
-*Podfile.lock
-*RxStudy.xcworkspace
-*Podfile
-*RxStudy
+
 
 
 
