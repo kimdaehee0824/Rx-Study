@@ -1,23 +1,23 @@
 PODS:
-  - Differentiator (5.0.0)
-  - "NSObject+Rx (5.2.1)":
-    - RxSwift (~> 6.0)
-  - RxCocoa (6.0.0):
-    - RxRelay (= 6.0.0)
-    - RxSwift (= 6.0.0)
-  - RxDataSources (5.0.0):
-    - Differentiator (~> 5.0)
-    - RxCocoa (~> 6.0)
-    - RxSwift (~> 6.0)
-  - RxRelay (6.0.0):
-    - RxSwift (= 6.0.0)
-  - RxSwift (6.0.0)
+  - Differentiator (4.0.1)
+  - "NSObject+Rx (5.1.0)":
+    - RxSwift (~> 5.1)
+  - RxCocoa (5.1.1):
+    - RxRelay (~> 5)
+    - RxSwift (~> 5)
+  - RxDataSources (4.0.1):
+    - Differentiator (~> 4.0)
+    - RxCocoa (~> 5.0)
+    - RxSwift (~> 5.0)
+  - RxRelay (5.1.1):
+    - RxSwift (~> 5)
+  - RxSwift (5.1.1)
 
 DEPENDENCIES:
   - "NSObject+Rx"
-  - RxCocoa (= 6.0.0)
+  - RxCocoa
   - RxDataSources
-  - RxSwift (= 6.0.0)
+  - RxSwift
 
 SPEC REPOS:
   trunk:
@@ -29,13 +29,13 @@ SPEC REPOS:
     - RxSwift
 
 SPEC CHECKSUMS:
-  Differentiator: e8497ceab83c1b10ca233716d547b9af21b9344d
-  "NSObject+Rx": 49ffbf55ad0bbc29a44547db63a9e33caf0c5d60
-  RxCocoa: 3f79328fafa3645b34600f37c31e64c73ae3a80e
-  RxDataSources: aa47cc1ed6c500fa0dfecac5c979b723542d79cf
-  RxRelay: 8d593be109c06ea850df027351beba614b012ffb
-  RxSwift: c14e798c59b9f6e9a2df8fd235602e85cc044295
+  Differentiator: 886080237d9f87f322641dedbc5be257061b0602
+  "NSObject+Rx": fa6bbcc1ab1faa06b01466bc09b1e0692bbc5946
+  RxCocoa: 32065309a38d29b5b0db858819b5bf9ef038b601
+  RxDataSources: efee07fa4de48477eca0a4611e6d11e2da9c1114
+  RxRelay: d77f7d771495f43c556cbc43eebd1bb54d01e8e9
+  RxSwift: 81470a2074fa8780320ea5fe4102807cb7118178
 
-PODFILE CHECKSUM: be04c2bf68c3f8d1461ac86ccac8b9f70e6366ce
+PODFILE CHECKSUM: e3d72c5eb484bc8c114b284b9e04f72b9239417b
 
 COCOAPODS: 1.10.1
