@@ -6,11 +6,8 @@ target 'RxWeather' do
   use_frameworks!
 
   # Pods for RxWeather
-
-pod 'RxSwift', '6.0.0'
-pod 'NSObject+Rx'
-pod 'RxDataSources'
-pod 'RxCocoa', '6.0.0'
-
+  pod 'RxSwift'
+  pod 'RxCocoa'
+  pod 'NSObject+Rx'
+  pod 'RxDataSources'
 end
-
