@@ -9,7 +9,6 @@ import NSObject_Rx
 typealias SectionModel = AnimatableSectionModel<Int, WeatherData>
 
 class MainViewModel: HasDisposeBag {
-
     
     static let tempFormatter: NumberFormatter = {
         let formatter = NumberFormatter()
@@ -37,6 +36,11 @@ class MainViewModel: HasDisposeBag {
         self.sceneCoordinator = sceneCoordinator
         self.WeatherAPI = WeatherAPI
         self.locationProvider = locationProvider
+        
+        locationProvider.currentAddress()
+            .bind(to: self.title)
+            .disposed(by: disposeBag)
+        
     }
     
     var weatherData : Driver<[SectionModel]> {
