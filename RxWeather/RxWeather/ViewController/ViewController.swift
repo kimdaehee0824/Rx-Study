@@ -10,15 +10,20 @@ class ViewController: UIViewController, ViewModelBindableType {
    var viewModel: MainViewModel!
    
    @IBOutlet weak var locationLabel: UILabel!
-   
    @IBOutlet weak var listTableView: UITableView!
    
    func bindViewModel() {
-      
+       viewModel.title
+           .bind(to: locationLabel.rx.text)
+           .disposed(by: rx.disposeBag)
+       viewModel.weatherData
+           .drive(listTableView.rx.items(dataSource: viewModel.dataSourse))
+           .disposed(by: rx.disposeBag)
    }
    
    override func viewDidLoad() {
       super.viewDidLoad()
+       locationLabel.textColor = UIColor.label
       listTableView.backgroundColor = UIColor.clear
       listTableView.separatorStyle = .none
       listTableView.showsVerticalScrollIndicator = false
@@ -35,13 +40,13 @@ class ViewController: UIViewController, ViewModelBindableType {
    override func viewDidLayoutSubviews() {
       super.viewDidLayoutSubviews()
       
-      if topInset == 0.0 {
-         let first = IndexPath(row: 0, section: 0)
-         if let cell = listTableView.cellForRow(at: first) {
-            topInset = listTableView.frame.height - cell.frame.height
-            listTableView.contentInset = UIEdgeInsets(top: topInset, left: 0, bottom: 0, right: 0)
-         }
-      }
+//      if topInset == 0.0 {
+//         let first = IndexPath(row: 0, section: 0)
+//         if let cell = listTableView.cellForRow(at: first) {
+//            topInset = listTableView.frame.height - cell.frame.height
+//            listTableView.contentInset = UIEdgeInsets(top: topInset, left: 0, bottom: 0, right: 0)
+//         }
+//      }
    }
 }
 
