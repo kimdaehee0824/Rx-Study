@@ -16,10 +16,7 @@ struct Forecast: Codable {
         }
 
         let main: Main
-        func arrayRepresentation() -> [WeatherData] {
-            let data = [WeatherData]()
-            return data
-        }
+
         struct Weather: Codable {
             let description: String
             let icon: String

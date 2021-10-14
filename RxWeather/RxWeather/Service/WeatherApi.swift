@@ -31,12 +31,8 @@ class OpenWeatherMap: NSObject, WeatherApiType {
             .map { data -> [WeatherData] in
                 let decoder = JSONDecoder()
                 let forecast = try decoder.decode(Forecast.self, from: data)
-                if let list = forecast.list.first?.arrayRepresentation() {
-                    return list
-                }
-                return [WeatherData]()
+                return forecast.list.map(WeatherData.init)
             }
-        
     }
     
     @discardableResult

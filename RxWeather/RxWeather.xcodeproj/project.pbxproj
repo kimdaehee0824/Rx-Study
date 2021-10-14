@@ -148,6 +148,7 @@
 				AA0D6FBC233E929200166449 /* Assets.xcassets */,
 				AA0D6FBE233E929200166449 /* LaunchScreen.storyboard */,
 				AA0D6FC1233E929200166449 /* Info.plist */,
+				AA67F161233EE0CF00F35440 /* RxCLLocationManagerDelegateProxy.swift */,
 			);
 			path = RxWeather;
 			sourceTree = "<group>";
@@ -203,7 +204,6 @@
 				AA67F153233EC52200F35440 /* LocationProviderType.swift */,
 				AA67F155233EC52200F35440 /* StaticLocationProvider.swift */,
 				AA67F154233EC52200F35440 /* CoreLocationProvider.swift */,
-				AA67F161233EE0CF00F35440 /* RxCLLocationManagerDelegateProxy.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
