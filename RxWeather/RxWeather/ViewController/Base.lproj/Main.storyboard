@@ -20,23 +20,23 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="COW-wp-gcJ">
                                 <rect key="frame" x="0.0" y="44" width="414" height="60"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="지역이 들어가요" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AsS-Iu-L0C">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="60"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="지역이 들어가요" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AsS-Iu-L0C">
+                                        <rect key="frame" x="82" y="0.0" width="251" height="45"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstAttribute="trailing" secondItem="AsS-Iu-L0C" secondAttribute="trailing" id="0oX-BO-Gpk"/>
+                                    <constraint firstItem="AsS-Iu-L0C" firstAttribute="leading" secondItem="COW-wp-gcJ" secondAttribute="leading" constant="82" id="8Y2-B6-XkS"/>
                                     <constraint firstAttribute="height" constant="60" id="LEn-D2-Epl"/>
-                                    <constraint firstAttribute="bottom" secondItem="AsS-Iu-L0C" secondAttribute="bottom" id="P4C-qz-9hY"/>
+                                    <constraint firstAttribute="bottom" secondItem="AsS-Iu-L0C" secondAttribute="bottom" constant="15" id="P4C-qz-9hY"/>
                                     <constraint firstItem="AsS-Iu-L0C" firstAttribute="top" secondItem="COW-wp-gcJ" secondAttribute="top" id="Q3D-Hb-Lnf"/>
-                                    <constraint firstItem="AsS-Iu-L0C" firstAttribute="leading" secondItem="COW-wp-gcJ" secondAttribute="leading" id="kLn-JO-JRh"/>
+                                    <constraint firstItem="AsS-Iu-L0C" firstAttribute="centerX" secondItem="COW-wp-gcJ" secondAttribute="centerX" id="cVi-mC-q9T"/>
                                 </constraints>
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="none" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="zrY-Mu-hdm">
-                                <rect key="frame" x="0.0" y="104" width="414" height="758"/>
+                                <rect key="frame" x="0.0" y="91" width="414" height="771"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="SummaryTableViewCell" rowHeight="180" id="TuY-dd-AAV" customClass="SummaryTableViewCell" customModule="RxWeather" customModuleProvider="target">
@@ -169,7 +169,7 @@
                             <constraint firstItem="COW-wp-gcJ" firstAttribute="top" secondItem="Axv-Yb-ICf" secondAttribute="top" id="McP-LU-3LY"/>
                             <constraint firstItem="Axv-Yb-ICf" firstAttribute="bottom" secondItem="zrY-Mu-hdm" secondAttribute="bottom" id="MdV-xu-JbH"/>
                             <constraint firstItem="COW-wp-gcJ" firstAttribute="leading" secondItem="Axv-Yb-ICf" secondAttribute="leading" id="Oik-NJ-L4v"/>
-                            <constraint firstItem="zrY-Mu-hdm" firstAttribute="top" secondItem="COW-wp-gcJ" secondAttribute="bottom" id="P6L-Dt-vHH"/>
+                            <constraint firstItem="zrY-Mu-hdm" firstAttribute="top" secondItem="COW-wp-gcJ" secondAttribute="bottom" constant="-13" id="P6L-Dt-vHH"/>
                             <constraint firstItem="Axv-Yb-ICf" firstAttribute="trailing" secondItem="COW-wp-gcJ" secondAttribute="trailing" id="QKg-7b-xMg"/>
                             <constraint firstItem="Axv-Yb-ICf" firstAttribute="trailing" secondItem="zrY-Mu-hdm" secondAttribute="trailing" id="hOd-El-wXa"/>
                         </constraints>
@@ -181,7 +181,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="139" y="139"/>
+            <point key="canvasLocation" x="137.68115942028987" y="138.61607142857142"/>
         </scene>
     </scenes>
     <resources>
