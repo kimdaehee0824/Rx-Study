@@ -6,14 +6,10 @@ class ForecastTableViewCell: UITableViewCell {
    static let identifier = "ForecastTableViewCell"
    
    @IBOutlet weak var dateLabel: UILabel!
-   
    @IBOutlet weak var timeLabel: UILabel!
-   
    @IBOutlet weak var weatherImageView: UIImageView!
    
-   
    @IBOutlet weak var statusLabel: UILabel!
-   
    @IBOutlet weak var temperatureLabel: UILabel!
    
    
@@ -22,10 +18,10 @@ class ForecastTableViewCell: UITableViewCell {
       
       backgroundColor = UIColor.clear
       
-      statusLabel.textColor = UIColor.white
-      dateLabel.textColor = statusLabel.textColor
-      timeLabel.textColor = statusLabel.textColor
-      temperatureLabel.textColor = statusLabel.textColor
+      statusLabel.textColor = UIColor.label
+      dateLabel.textColor = UIColor.label
+      timeLabel.textColor = UIColor.label
+      temperatureLabel.textColor = UIColor.label
    }
    
    func configure(from data: WeatherDataType, dateFormatter: DateFormatter, tempFormatter: NumberFormatter) {

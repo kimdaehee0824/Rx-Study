@@ -220,8 +220,8 @@
 		AA0D6FE3233EA19D00166449 /* Cell */ = {
 			isa = PBXGroup;
 			children = (
-				AA0D6FE4233EA1BF00166449 /* ForecastTableViewCell.swift */,
 				AA0D6FE5233EA1BF00166449 /* SummaryTableViewCell.swift */,
+				AA0D6FE4233EA1BF00166449 /* ForecastTableViewCell.swift */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
