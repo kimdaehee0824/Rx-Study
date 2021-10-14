@@ -37,13 +37,20 @@ extension Reactive where Base : CLLocationManager {
         let sele : Selector
         if #available(iOS 14.0, *) {
             sele = #selector(CLLocationManagerDelegate.locationManagerDidChangeAuthorization(_:))
+            return dekegate.methodInvoked(sele)
+                .map { parematers in
+                    return( parematers[0] as! CLLocationManager).authorizationStatus
+                    
+                }
+            
         } else {
             sele = #selector(CLLocationManagerDelegate.locationManager(_: didChangeAuthorization:))
+            return dekegate.methodInvoked(sele)
+                .map { paraetors in
+                    return CLAuthorizationStatus(rawValue: paraetors[1] as! Int32) ?? .notDetermined
+                }
         }
-        return dekegate.methodInvoked(sele)
-            .map { paraetors in
-                return CLAuthorizationStatus(rawValue: paraetors[1] as! Int32) ?? .notDetermined
-            }
+        
     }
 }
 

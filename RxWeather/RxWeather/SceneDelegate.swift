@@ -16,7 +16,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         let sceneCoordinator = SceneCoordinator(window: window!)
         let weatherAPI = OpenWeatherMapApi()
-        let locationProvider = StaticLocationProvider()
+        let locationProvider = CoreLocationProvider()
         let viewModel = MainViewModel(title: "", sceneCoordinator: sceneCoordinator, WeatherAPI: weatherAPI, locationProvider: locationProvider)
         
         let scene = Scene.main(viewModel)
@@ -51,5 +51,4 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // Use this method to save data, release shared resources, and store enough scene-specific state information
         // to restore the scene back to its current state.
     }
-    
 }
