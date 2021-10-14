@@ -32,8 +32,8 @@ class MainViewModel: HasDisposeBag {
     let locationProvider : LocationProviderType
     
     
-    internal init(title: BehaviorRelay<String>, sceneCoordinator: SceneCoordinatorType, WeatherAPI: WeatherApiType, locationProvider: LocationProviderType) {
-        self.title = title
+    internal init(title: String, sceneCoordinator: SceneCoordinatorType, WeatherAPI: WeatherApiType, locationProvider: LocationProviderType) {
+        self.title = BehaviorRelay(value: title)
         self.sceneCoordinator = sceneCoordinator
         self.WeatherAPI = WeatherAPI
         self.locationProvider = locationProvider
