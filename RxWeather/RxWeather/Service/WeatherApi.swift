@@ -7,7 +7,7 @@ import CoreLocation
 import NSObject_Rx
 import UIKit
 
-class OpenWeatherMap: NSObject, WeatherApiType {
+class OpenWeatherMapApi: NSObject, WeatherApiType {
     
     private let summaryRelay = BehaviorRelay<WeatherDataType?>(value: nil)
     private let forecastRelay = BehaviorRelay<[WeatherDataType]>(value: [])
